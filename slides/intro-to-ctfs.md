@@ -12,6 +12,8 @@ verticalSeparator: "^--$"
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/monokai-sublime.min.css">
 
+<link rel="icon" href="./favicon.ico" type="image/x-icon">
+
 # Intro to CTFs
 
 #### + other things you should know
