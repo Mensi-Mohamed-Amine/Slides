@@ -10,6 +10,8 @@ separator: "^---$"
 verticalSeparator: "^--$"
 ---
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/monokai-sublime.min.css">
+
 # Intro to CTFs
 
 #### + other things you should know
