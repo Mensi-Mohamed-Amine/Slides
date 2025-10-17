@@ -10,24 +10,31 @@ jobs:
   generate_site:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout repo
-        uses: actions/checkout@v2
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
-      - name: setup node
-        uses: actions/setup-node@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: "18"
 
-      - name: install reveal-md
-        run: npm i reveal-md
+      - name: Install reveal-md
+        run: npm install reveal-md
 
-      - name: md -> html conversion using revealmd
+      # 🩹 Fix missing Dracula highlight theme
+      - name: Add Dracula theme manually
+        run: |
+          mkdir -p node_modules/highlight.js/styles
+          curl -o node_modules/highlight.js/styles/dracula.css \
+            https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/dracula.min.css
+
+      - name: Generate static site
         run: ./node_modules/.bin/reveal-md slides --static docs --highlight-theme dracula
 
-      - name: push site files
+      - name: Push site files
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add docs
-          git commit -m "mdslides2website"
+          git diff-index --quiet HEAD || git commit -m "mdslides2website"
           git push
