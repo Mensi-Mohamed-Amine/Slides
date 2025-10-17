@@ -14,6 +14,7 @@ revealOptions:
 
 - Capture The Flag
 - Special kind of information security
+- You'll apply your cybersecurity skills to solve a challenge and get the flag.
 
 ---
 
@@ -22,9 +23,8 @@ revealOptions:
 - A secret string
 - Can be found only when you successfully solve the challenge
 - Thus, submitted as a proof of completion
-- Usually of a format like `xyzCTF{}`
-  - `xyzCTF{f0und_7h3_fl4g}`
-- In pentesting and some CTF variants, the flag can be found in a file accessible only when you break into the system
+- Usually of a format like `Curiosity{.*}`
+  - `Curiosity{f0und_7h3_fl4g}`
 
 ---
 
