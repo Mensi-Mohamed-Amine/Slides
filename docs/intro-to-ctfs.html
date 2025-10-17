@@ -1,231 +1,276 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-    <title>Intro to CTFs</title>
+    <title>My Slides</title>
     <link rel="shortcut icon" href="./favicon.ico" />
     <link rel="stylesheet" href="./dist/reset.css" />
     <link rel="stylesheet" href="./dist/reveal.css" />
     <link rel="stylesheet" href="./dist/theme/black.css" id="theme" />
-    <link rel="stylesheet" href="./css/highlight/dracula.css" />
-
+    <link rel="stylesheet" href="./css/highlight/base16/zenburn.css" />
 
   </head>
   <body>
     <div class="reveal">
-      <div class="slides"><section  data-markdown><script type="text/template">
+      <div class="slides">
+        <section data-markdown data-separator="^---$" data-separator-vertical="^--$">
+          <textarea data-template>
+            
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/monokai-sublime.min.css">
 
 # Intro to CTFs
 
 #### + other things you should know
-</script></section><section ><section data-markdown><script type="text/template">
+
+---
+
 ## CTF
 
-* Capture The Flag
-* Special kind of information security competitions
-</script></section><section data-markdown><script type="text/template">
+- Capture The Flag
+- Special kind of information security
+- You will apply your cybersecurity skills to solve a challenge and get the flag.
+
+--
+
 ### Flag
 
-* A secret string
-* Can be found only when you successfully solve the challenge
-* Thus, submitted as a proof of completion
-* Usually of a format like `xyzCTF{}`
-	* `xyzCTF{f0und_7h3_fl4g}`
-* In pentesting and some CTF variants, the flag can be found in a file accessible only when you break into the system
-</script></section><section data-markdown><script type="text/template">
+- A secret string
+- Can be found only when you successfully solve the challenge
+- Thus, submitted as a proof of completion
+- Usually of a format like `Curiosity{.*}`
+  - `Curiosity{f0und_7h3_fl4g}`
+
+--
+
 ### ctftime.org
 
-* Use [ctftime.org](https://ctftime.org) to track CTFs and your team’s performance
-* CTF calendar
-* World-wide and country-wide team ratings
-* Writeups
-</script></section></section><section ><section data-markdown><script type="text/template">
+- Use [ctftime.org](https://ctftime.org) to track CTFs and your team’s performance
+- CTF calendar
+- World-wide and country-wide team ratings
+- Writeups
+
+---
+
 ## Variants
 
-* Jeopardy
-* Attack-Defence
-* KOTH
-* Hardware
-</script></section><section data-markdown><script type="text/template">
+- Jeopardy
+- Attack-Defence
+- KOTH
+- Hardware
+
+--
+
 ### Jeopardy
 
-* Challenges from various categories
-* Most famous
-* Find the flag and submit it for points
-* Dynamic scoring
-	* -> more solves, less points
-* Extra points for the first solve - `First Blood`
-</script></section><section data-markdown><script type="text/template">
+- Challenges from various categories
+- Most famous
+- Find the flag and submit it for points
+- Dynamic scoring
+  - -> more solves, less points
+- Extra points for the first solve - `First Blood`
+
+--
+
 ### Attack-Defence
 
-* Each team will be given a vulnerable service
-* Teams will defend their own service and patch it up
-* Simultaneously, attack the other teams' services and develop exploits
-* DEFCON and NYU-CSAW Finals
-</script></section><section data-markdown><script type="text/template">
+- Each team will be given a vulnerable service
+- Teams will defend their own service and patch it up
+- Simultaneously, attack the other teams' services and develop exploits
+- DEFCON and NYU-CSAW Finals
+
+--
+
 ### KOTH
 
-* King Of The Hill
-* Asbolute chaos and fun
-* Multiple teams
-* Single target network consisting of many inter-connected systems
-* Repeatedly pivot and gain access to systems
-* Defend them from other teams
-* TryHackMe and HackTheBox
-</script></section><section data-markdown><script type="text/template">
+- King Of The Hill
+- Asbolute chaos and fun
+- Multiple teams
+- Single target network consisting of many inter-connected systems
+- Repeatedly pivot and gain access to systems
+- Defend them from other teams
+- TryHackMe and HackTheBox
+
+--
+
 ### Hardware
 
-* Black box testing
-* Break built-in security measures
-* Example: side-channel attacks
-</script></section></section><section  data-markdown><script type="text/template">
+- Black box testing
+- Break built-in security measures
+- Example: side-channel attacks
+
+---
+
 ## Categories
 
-* Cryptography
-* Web Exploitation
-* Reverse Engineering
-	* Binary Exploitation
-* Forensics
-	* Steganography
-* OSINT
-* Programming
-</script></section><section ><section data-markdown><script type="text/template">
+- Cryptography
+- Web Exploitation
+- Reverse Engineering
+  - Binary Exploitation
+- Forensics
+  - Steganography
+- OSINT
+- Programming
+
+---
+
 ### Cryptography
 
-* Cryptic message with a hint in the challenge description or title
-* Deeper concepts require a good knowledge of mathematics
-* Rotation ciphers are a starting point
-</script></section><section data-markdown><script type="text/template">
+- Cryptic message with a hint in the challenge description or title
+- Deeper concepts require a good knowledge of mathematics
+- Rotation ciphers are a starting point
+
+--
+
 ### ROTN
 
-* Encryption by shifting each character by N places to the right
-* Most popular - **ROT13** aka Caesar Cipher
+- Encryption by shifting each character by N places to the right
+- Most popular - **ROT13** aka Caesar Cipher
 
 $$E_n(x) = (x+n) mod 26$$
 
 $$E_n^\prime(x) = D_n(x) = (x-n) mod 26$$
-</script></section><section data-markdown><script type="text/template">
+
+--
+![valid example](assets/intro-to-ctfs/crypto/4.png)
+--
+
 ### Challenge #1
 
-**Encrypted message:** (HEX)
+**Encrypted message:**
 
-`170d05080a0d0c0a19010a06041e06020a19`
-
-**Encryption Key:** (HEX)
-
-`6468696e6368616b706f6f6a61726f636b73`
+`Phevbfvgl{ebg13_penpx3q_fhpp3ffsh11l}`
 
 **Encryption Method:**
 
-`XOR`
+`ROT13`
 
 Decrypt the message
-</script></section><section data-markdown><script type="text/template">
+
+--
+
 ### Solution
 
-**Property of XOR:**
+https://cryptii.com/pipes/rot13-decoder
 
-1. $$a \oplus a = 0$$
+![valid example](assets/intro-to-ctfs/crypto/1.png)
 
-2. $$a \oplus 0 = a$$
-</script></section><section data-markdown><script type="text/template">
-$$\implies msg \oplus key \oplus key = msg$$
+--
 
-XOR the encrypted message with the key again to get the original message again
-
-`73656c6669656d61696e656c656c6961616a`
-</script></section></section><section ><section data-markdown><script type="text/template">
-### Web Exploitation
-
-* Deals with web applications
-* Identify flaws in the working of the web app
-	* how it processes user input
-	* programming flaw
-* Knowledge of web development will be helpful
-	* at least, you require the ability to read and understand JS and PHP code
-* [OWASP Top10](https://owasp.org/www-project-top-ten/)
-</script></section><section data-markdown><script type="text/template">
 ### Challenge #2
 
-* Text box that receives input of ID of person
-* Outputs all the details of that person
-* Incomplete or invalid queries err out silently
+**Encrypted message:**
 
-![valid example](assets/intro-to-ctfs/web/sqli1.png)
-</script></section><section data-markdown><script type="text/template">
-### HINT 1
+`Q3VyaW9zaXR5e3RoMXNfNF9iYXNlNjRfc3RyMW5nfQ==`
 
-SQL query in the backend might be something similar to
+**Encryption Method:**
 
-```SQL
-SELECT * FROM accounts WHERE id="$INPUT_ID"
-```
-</script></section><section data-markdown><script type="text/template">
-### HINT 2
+`NOT PROVIDED :))))))) YOUR ON YOUR OWN FOR THIS ONE ....`
 
-Think about logical operators
-</script></section><section data-markdown><script type="text/template">
-### HINT 2
+Decrypt the message
 
-**$INPUT_ID**:
+--
 
-```
-1" OR <SOME_CONDITION>
-```
-
-**Complete query**:
-
-```SQL
-SELECT * FROM accounts WHERE id="1" OR <SOME_CONDITION>"
-```
-</script></section><section data-markdown><script type="text/template">
-### HINT 3
-
-Think about a condition which is always true
-</script></section><section data-markdown><script type="text/template">
-### HINT 3
-
-**$INPUT_ID**:
-
-```
-1" OR 1=1
-```
-
-**Complete query**:
-
-```SQL
-SELECT * FROM accounts WHERE id="1" OR 1=1"
-```
-
-**But**, is this query valid?
-</script></section><section data-markdown><script type="text/template">
-### HINT 4
-
-How do we make this query valid?
-</script></section><section data-markdown><script type="text/template">
 ### Solution
 
-The SQL query can be made valid by
+- step 1 : Identifier the cipher (cipher = encryption algorithm).
 
-* making the condition a string check i.e "1"="1"
-* and thus accounting for the extra `"`
+https://www.dcode.fr/cipher-identifier
 
-**$INPUT_ID**:
+![valid example](assets/intro-to-ctfs/crypto/2.png)
 
-```
-1" OR "1"="1
-```
+--
 
-**Complete query**:
+- step 2 : decrypt the ciphertext to get the flag.
+
+https://gchq.github.io/CyberChef/
+
+![valid example](assets/intro-to-ctfs/crypto/3.png)
+
+---
+
+### Web Exploitation
+
+- Deals with web applications
+- Identify flaws in the working of the web app
+  - how it processes user input
+  - programming flaw
+- Knowledge of web development will be helpful
+  - at least, you require the ability to read and understand JS and PHP code
+- [OWASP Top10](https://owasp.org/www-project-top-ten/)
+
+--
+
+### Challenge #1
+
+- We have a login/register website.
+- The flag is in the database of the website.
+
+--
+
+- http://51.77.151.20:2789/
+
+![valid example](assets/intro-to-ctfs/web/2.png)
+
+--
+
+- Backend query.
 
 ```SQL
-SELECT * FROM accounts WHERE id="1" OR "1"="1"
+SELECT username FROM users WHERE username = '${username}' AND password = '${password}'
 ```
-</script></section><section data-markdown><script type="text/template">
-![boom, you just got sqli-d](assets/intro-to-ctfs/web/sqli2.png)
-</script></section></section><section ><section data-markdown><script type="text/template">
+
+--
+
+- Normal behaviour :
+
+```SQL
+SELECT username FROM users WHERE username = 'mohamed' AND password = 'mohamed2025'
+```
+
+![valid example](assets/intro-to-ctfs/web/1.png)
+
+--
+
+- Malicious input :
+
+```SQL
+SELECT username FROM users WHERE username = '' OR 1=1 --' AND password = 'alsdkhflkajshdflkjahdsf'
+```
+
+![valid example](assets/intro-to-ctfs/web/3.png)
+
+--
+
+- We logged in :))))))))))
+
+![valid example](assets/intro-to-ctfs/web/4.png)
+
+--
+
+- Now after confirming that the website is vulnerable we will go-on for advanced sql-injection vulnerability exploitation
+  using `sqlmap`.
+
+--
+
+- We will use the following sqlmap command to attack the website.
+
+```bash
+sqlmap --flush-session -u "http://51.77.151.20:2789/login" --data="username=alice&password=wonderland" -T users --dump --batch --threads 10
+```
+
+![valid example](assets/intro-to-ctfs/web/5.png)
+
+--
+
+- And we got our flag :))))))
+
+![valid example](assets/intro-to-ctfs/web/6.png)
+
+---
+
 ### Reverse Engineering
 
 - In simple terms Reverse Engineering refers to the process of deconstructing any engineered object to figure out the internal mechanisms.
@@ -233,64 +278,70 @@ SELECT * FROM accounts WHERE id="1" OR "1"="1"
 - Reverse Engineering in a CTF is typically the process of taking a compiled program ( like apk, exe, elf ) and converting it back into a more human readable format.
 
 - The goal of a reverse engineering challenge is to understand the functionality of a given program such that you can identify deeper issues.
-</script></section><section data-markdown><script type="text/template">
-![assets/intro-to-ctfs/re/levelsofapl.png](assets/intro-to-ctfs/re/levelsofapl.png)
-</script></section><section data-markdown><script type="text/template">
-## Example
 
-![assets/intro-to-ctfs/re/untitled.png](assets/intro-to-ctfs/re/untitled.png)
-</script></section><section data-markdown><script type="text/template">
-![assets/intro-to-ctfs/re/untitled_01.png](assets/intro-to-ctfs/re/untitled_01.png)
-</script></section><section data-markdown><script type="text/template">
-![assets/intro-to-ctfs/re/untitled_02.png](assets/intro-to-ctfs/re/untitled_02.png)
-</script></section><section data-markdown><script type="text/template">
-![assets/intro-to-ctfs/re/untitled_03.png](assets/intro-to-ctfs/re/untitled_03.png)
-</script></section><section data-markdown><script type="text/template">
-![assets/intro-to-ctfs/re/untitled_04.png](assets/intro-to-ctfs/re/untitled_04.png)
-</script></section><section data-markdown><script type="text/template">
-![assets/intro-to-ctfs/re/untitled_05.png](assets/intro-to-ctfs/re/untitled_05.png)
-</script></section></section><section ><section data-markdown><script type="text/template">
+--
+
+![assets/intro-to-ctfs/re/levelsofapl.png](assets/intro-to-ctfs/re/levelsofapl.png)
+
+---
+
 ### Forensics
 
 - Forensics is the art of recovering the digital trail left on a computer. There are plently of methods to find data which is seemingly deleted, not stored, or worse, covertly recorded.
 
 - In a CTF context, "Forensics" challenges can include file format analysis, steganography, memory dump analysis, or network packet capture analysis.
-</script></section><section data-markdown><script type="text/template">
+
+--
+
 - Any challenge to examine and process a hidden piece of information out of static data files (as opposed to executable programs or remote servers) could be considered a Forensics challenge
-</script></section><section data-markdown><script type="text/template">
+
+--
+
 ### Example
 
 We are given an image, and it might contain certain hidden information
 
 <img src = "assets/intro-to-ctfs/forensics/dog.jpg" width = "300">
-</script></section><section data-markdown><script type="text/template">
+
+--
+
 We start by examining the file type and other metadata of the image using the tool `exiftool`
 
 ![assets/intro-to-ctfs/forensics/exiftool.png](assets/intro-to-ctfs/forensics/exiftool.png)
 
 `exiftool` didn't tell us anything usefull except that it is infact a `jpeg` image
-</script></section><section data-markdown><script type="text/template">
+
+--
+
 Now we will use `binwalk` tool to examine if there is some compressed data inside the image
 
 ![assets/intro-to-ctfs/forensics/binwalk.png](assets/intro-to-ctfs/forensics/binwalk.png)
 
-looks like there is a `hidden_text.txt` file  compressed in the image. We can extract it using `binwalk -e` command.
-</script></section><section data-markdown><script type="text/template">
+looks like there is a `hidden_text.txt` file compressed in the image. We can extract it using `binwalk -e` command.
+
+--
+
 ![assets/intro-to-ctfs/forensics/extract.png](assets/intro-to-ctfs/forensics/extract.png)
 
 Finally we've got the "flag".
-</script></section></section><section ><section data-markdown><script type="text/template">
+
+---
+
 ### OSINT
 
-* Open Source INTelligence
-	* Anything that is available to everybody in the internet
-* If you know how to search smartly, the challenge is already over
-* Google Dorks is your excalibur
-</script></section><section data-markdown><script type="text/template">
+- Open Source INTelligence
+  - Anything that is available to everybody in the internet
+- If you know how to search smartly, the challenge is already over
+- Google Dorks is your excalibur
+
+--
+
 ### Challenge #5
 
-* Find my roll number
-</script></section><section data-markdown><script type="text/template">
+- Find my roll number
+
+--
+
 ### Solution
 
 **Google query**:
@@ -298,19 +349,23 @@ Finally we've got the "flag".
 ```
 <name> <roll_num_format> site:<college website>
 ```
-</script></section></section><section ><section data-markdown><script type="text/template">
+
+---
+
 ### Programming
 
-* Programming challenge
-* Usually automation related or simple problem-solving
-* **Python** is a high-level general purpose programming language
-	* Huge library and community
-	* Easy to learn and v useful
-* Used in all places, right from RE to WE
-</script></section><section data-markdown><script type="text/template">
+- Programming challenge
+- Usually automation related or simple problem-solving
+- **Python** is a high-level general purpose programming language
+  - Huge library and community
+  - Easy to learn and v useful
+- Used in all places, right from RE to WE
+
+--
+
 ### Challenge #6
 
-* You are given a large chunk of text worth easily over 100MB
+- You are given a large chunk of text worth easily over 100MB
 
 ```text
 akOjas;kdfjFs;kdfjasFkfja;kfajf;kIjfdkjCfkafEk
@@ -319,10 +374,12 @@ zmnEcv,mncv,mznvzvnzvBvnzvnzmvnzmcvnzExvbzcvbs
 qwemSnq,embrtjThvovchzoivucTaanfamfdnqVewnrucp
 ewnSqmnrzhvcHicvuapiuasdfna.OenrqwmenrjhWziocu
 ```
-</script></section><section data-markdown><script type="text/template">
+
+--
+
 ## HINT
 
-* Anything odd?
+- Anything odd?
 
 ```text
 akOjas;kdfjFs;kdfjasFkfja;kfajf;kIjfdkjCfkafEk
@@ -331,77 +388,63 @@ zmnEcv,mncv,mznvzvnzvBvnzvnzmvnzmcvnzExvbzcvbs
 qwemSnq,embrtjThvovchzoivucTaanfamfdnqVewnrucp
 ewnSqmnrzhvcHicvuapiuasdfna.OenrqwmenrjhWziocu
 ```
-</script></section><section data-markdown><script type="text/template">
+
+--
+
 ### Solution
 
-* Notice that the capital letters form something meaningful
-* \*insert some ezpz programming with ASCII values\*
-* Extracted capital letter form this:
+- Notice that the capital letters form something meaningful
+- \*insert some ezpz programming with ASCII values\*
+- Extracted capital letter form this:
 
 ```text
 OFFICEISTHEBESTTVSHOW
 ```
-</script></section></section><section  data-markdown><script type="text/template">
+
+---
+
 ### Pentesting
 
-* Penetration testing
-* "Penetrate" the security measures and gain access to the system
-* Multiple ways to exploit a single system
-* Usually involves one or more of the above categories
-* Simulates real world scenarios
-</script></section><section  data-markdown><script type="text/template">
+- Penetration testing
+- "Penetrate" the security measures and gain access to the system
+- Multiple ways to exploit a single system
+- Usually involves one or more of the above categories
+- Simulates real world scenarios
+
+---
+
 ## Practice sites
 
-* [TryHackMe](https://tryhackme.com)
-* [VulnHub](https://www.vulnhub.com/)
-* [HackTheBox](https://hackthebox.eu)
+- [TryHackMe](https://tryhackme.com)
+- [VulnHub](https://www.vulnhub.com/)
+- [HackTheBox](https://hackthebox.eu)
 
 (in that order)
-</script></section><section  data-markdown><script type="text/template">
+
+---
+
 **Don't be a script kiddie**
 
 ![script kiddie](assets/intro-to-ctfs/script_kiddie.png)
-</script></section><section ><section data-markdown><script type="text/template">
+
+---
+
 ## Writeups and reports
 
-* Make sure to record your approaches
-* Will definitely benefit you in long pentests and challenges where you will have to connect multiple services and systems to exploit the system
-* Helpful to others too
-</script></section><section data-markdown><script type="text/template">
-* Professional pentesters are expected to provide 30-page reports
-* [OffSec report](https://www.offensive-security.com/reports/sample-penetration-testing-report.pdf)
-* Preferably in markdown, because
-	* Plain text -> easily transferrable
-	* Exportable to literally any other format
-	* No need to install another application
-	* Your favourite text editor will do
-</script></section></section><section ><section data-markdown><script type="text/template">
-## Blog
+- Make sure to record your approaches
+- Will definitely benefit you in long pentests and challenges where you will have to connect multiple services and systems to exploit the system
+- Helpful to others too
 
-If you dislike any or all of the following
+---
 
-* front-end web development
-* writing HTML code and content
-* styling with CSS
-* creating your webpage from scratch
-
-then, [**Jekyll**](https://jekyllrb.com/) is your friend
-</script></section><section data-markdown><script type="text/template">
-* Write content in markdown and Jekyll will generate the HTML for it
-* [**GitHub pages**](https://pages.github.com) offers free and easy hosting solution for static websites
-* Check out [`jekyll-themes`](https://github.com/topics/jekyll-themes) on GitHub for amazing repos and sites
-</script></section></section><section  data-markdown><script type="text/template">
-## More about OWASP
-
-* [OWASP](https://owasp.org) is a non-profit org
-* Aims to make security more accessible
-* [Local chapters](https://owasp.org/chapters/) work in this spirit
-* Chapters have comm channels and regular events
-* Stay tuned for more exciting events from [our chapter](https://owasp.org/www-chapter-indian-institute-of-technology-patna/)
-</script></section></div>
+          </textarea>
+        </section>
+      </div>
     </div>
 
     <script src="./dist/reveal.js"></script>
+
+    <script src="./mermaid/dist/mermaid.min.js"></script>
 
     <script src="./plugin/markdown/markdown.js"></script>
     <script src="./plugin/highlight/highlight.js"></script>
@@ -429,6 +472,10 @@ then, [**Jekyll**](https://jekyllrb.com/) is your friend
         history: true,
         center: true,
         transition: 'default', // none/fade/slide/convex/concave/zoom
+        slideNumber: true,
+        highlight: {
+          highlightOnLoad: false
+        },
         plugins: [
           RevealMarkdown,
           RevealHighlight,
@@ -441,12 +488,29 @@ then, [**Jekyll**](https://jekyllrb.com/) is your friend
       // options from URL query string
       var queryOptions = Reveal().getQueryHash() || {};
 
-      var options = extend(defaultOptions, {"transition":"slide"}, queryOptions);
+      var options = extend(defaultOptions, {"transition":"slide","controls":true,"progress":true,"history":false,"slideNumber":false,"_":["slides"],"static":"out"}, queryOptions);
     </script>
 
 
     <script>
       Reveal.initialize(options);
+      Reveal.addEventListener('ready', function (event) {
+        const blocks = Reveal.getRevealElement().querySelectorAll('pre code:not(.mermaid)');
+        const hlp = Reveal.getPlugin('highlight');
+        blocks.forEach(hlp.highlightBlock);
+      });
+    </script>
+
+    <script>
+      const mermaidOptions = extend({ startOnLoad: false }, {});
+      mermaid.startOnLoad = false;
+      mermaid.initialize(mermaidOptions);
+      const cb = function (event) {
+        mermaid.init(mermaidOptions, '.stack.present > .present pre code.mermaid');
+        mermaid.init(mermaidOptions, '.slides > .present:not(.stack) pre code.mermaid');
+      }
+      Reveal.addEventListener('ready', cb);
+      Reveal.addEventListener('slidetransitionend', cb);
     </script>
   </body>
 </html>
