@@ -1,0 +1,33 @@
+name: RevealMDSiteBuild
+
+on:
+  push:
+    paths:
+      - 'slides/**'
+      - '!docs/**'
+
+jobs:
+  generate_site:
+    runs-on: ubuntu-latest
+    steps:
+        - name: checkout repo
+          uses: actions/checkout@v2
+
+        - name: setup node
+          uses: actions/setup-node@v2
+          with:
+            node-version: '14'
+
+        - name: install reveal-md
+          run: npm i reveal-md
+
+        - name: md -> html conversion using revealmd
+          run: ./node_modules/.bin/reveal-md slides --static docs --highlight-theme dracula
+
+        - name: push site files
+          run: |
+              git config --global user.name "github-actions[bot]"
+              git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+              git add docs
+              git commit -m "mdslides2website"
+              git push
