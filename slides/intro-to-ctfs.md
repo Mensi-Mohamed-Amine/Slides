@@ -6,6 +6,8 @@ revealOptions:
   progress: true
   history: false
   slideNumber: false
+  plugins:
+    - revealHighlight
 separator: "^---$"
 verticalSeparator: "^--$"
 ---
