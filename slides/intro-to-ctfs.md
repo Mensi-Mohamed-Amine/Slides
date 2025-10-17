@@ -1,7 +1,13 @@
 ---
-title: Intro to CTFs
+title: My Slides
 revealOptions:
   transition: "slide"
+  controls: true
+  progress: true
+  history: false
+  slideNumber: false
+separator: "^---$"
+verticalSeparator: "^--$"
 ---
 
 # Intro to CTFs
@@ -14,9 +20,9 @@ revealOptions:
 
 - Capture The Flag
 - Special kind of information security
-- You'll apply your cybersecurity skills to solve a challenge and get the flag.
+- You will apply your cybersecurity skills to solve a challenge and get the flag.
 
----
+--
 
 ### Flag
 
@@ -26,7 +32,7 @@ revealOptions:
 - Usually of a format like `Curiosity{.*}`
   - `Curiosity{f0und_7h3_fl4g}`
 
----
+--
 
 ### ctftime.org
 
@@ -44,7 +50,7 @@ revealOptions:
 - KOTH
 - Hardware
 
----
+--
 
 ### Jeopardy
 
@@ -55,7 +61,7 @@ revealOptions:
   - -> more solves, less points
 - Extra points for the first solve - `First Blood`
 
----
+--
 
 ### Attack-Defence
 
@@ -64,7 +70,7 @@ revealOptions:
 - Simultaneously, attack the other teams' services and develop exploits
 - DEFCON and NYU-CSAW Finals
 
----
+--
 
 ### KOTH
 
@@ -76,7 +82,7 @@ revealOptions:
 - Defend them from other teams
 - TryHackMe and HackTheBox
 
----
+--
 
 ### Hardware
 
@@ -105,7 +111,7 @@ revealOptions:
 - Deeper concepts require a good knowledge of mathematics
 - Rotation ciphers are a starting point
 
----
+--
 
 ### ROTN
 
@@ -116,7 +122,7 @@ $$E_n(x) = (x+n) mod 26$$
 
 $$E_n^\prime(x) = D_n(x) = (x-n) mod 26$$
 
----
+--
 
 ### Challenge #1
 
@@ -134,7 +140,7 @@ $$E_n^\prime(x) = D_n(x) = (x-n) mod 26$$
 
 Decrypt the message
 
----
+--
 
 ### Solution
 
@@ -144,7 +150,7 @@ Decrypt the message
 
 2. $$a \oplus 0 = a$$
 
----
+--
 
 $$\implies msg \oplus key \oplus key = msg$$
 
@@ -164,7 +170,7 @@ XOR the encrypted message with the key again to get the original message again
   - at least, you require the ability to read and understand JS and PHP code
 - [OWASP Top10](https://owasp.org/www-project-top-ten/)
 
----
+--
 
 ### Challenge #2
 
@@ -174,7 +180,7 @@ XOR the encrypted message with the key again to get the original message again
 
 ![valid example](assets/intro-to-ctfs/web/sqli1.png)
 
----
+--
 
 ### HINT 1
 
@@ -184,13 +190,13 @@ SQL query in the backend might be something similar to
 SELECT * FROM accounts WHERE id="$INPUT_ID"
 ```
 
----
+--
 
 ### HINT 2
 
 Think about logical operators
 
----
+--
 
 ### HINT 2
 
@@ -206,13 +212,13 @@ Think about logical operators
 SELECT * FROM accounts WHERE id="1" OR <SOME_CONDITION>"
 ```
 
----
+--
 
 ### HINT 3
 
 Think about a condition which is always true
 
----
+--
 
 ### HINT 3
 
@@ -230,13 +236,13 @@ SELECT * FROM accounts WHERE id="1" OR 1=1"
 
 **But**, is this query valid?
 
----
+--
 
 ### HINT 4
 
 How do we make this query valid?
 
----
+--
 
 ### Solution
 
@@ -257,7 +263,7 @@ The SQL query can be made valid by
 SELECT * FROM accounts WHERE id="1" OR "1"="1"
 ```
 
----
+--
 
 ![boom, you just got sqli-d](assets/intro-to-ctfs/web/sqli2.png)
 
@@ -271,33 +277,33 @@ SELECT * FROM accounts WHERE id="1" OR "1"="1"
 
 - The goal of a reverse engineering challenge is to understand the functionality of a given program such that you can identify deeper issues.
 
----
+--
 
 ![assets/intro-to-ctfs/re/levelsofapl.png](assets/intro-to-ctfs/re/levelsofapl.png)
 
----
+--
 
 ## Example
 
 ![assets/intro-to-ctfs/re/untitled.png](assets/intro-to-ctfs/re/untitled.png)
 
----
+--
 
 ![assets/intro-to-ctfs/re/untitled_01.png](assets/intro-to-ctfs/re/untitled_01.png)
 
----
+--
 
 ![assets/intro-to-ctfs/re/untitled_02.png](assets/intro-to-ctfs/re/untitled_02.png)
 
----
+--
 
 ![assets/intro-to-ctfs/re/untitled_03.png](assets/intro-to-ctfs/re/untitled_03.png)
 
----
+--
 
 ![assets/intro-to-ctfs/re/untitled_04.png](assets/intro-to-ctfs/re/untitled_04.png)
 
----
+--
 
 ![assets/intro-to-ctfs/re/untitled_05.png](assets/intro-to-ctfs/re/untitled_05.png)
 
@@ -309,11 +315,11 @@ SELECT * FROM accounts WHERE id="1" OR "1"="1"
 
 - In a CTF context, "Forensics" challenges can include file format analysis, steganography, memory dump analysis, or network packet capture analysis.
 
----
+--
 
 - Any challenge to examine and process a hidden piece of information out of static data files (as opposed to executable programs or remote servers) could be considered a Forensics challenge
 
----
+--
 
 ### Example
 
@@ -321,7 +327,7 @@ We are given an image, and it might contain certain hidden information
 
 <img src = "assets/intro-to-ctfs/forensics/dog.jpg" width = "300">
 
----
+--
 
 We start by examining the file type and other metadata of the image using the tool `exiftool`
 
@@ -329,7 +335,7 @@ We start by examining the file type and other metadata of the image using the to
 
 `exiftool` didn't tell us anything usefull except that it is infact a `jpeg` image
 
----
+--
 
 Now we will use `binwalk` tool to examine if there is some compressed data inside the image
 
@@ -337,7 +343,7 @@ Now we will use `binwalk` tool to examine if there is some compressed data insid
 
 looks like there is a `hidden_text.txt` file compressed in the image. We can extract it using `binwalk -e` command.
 
----
+--
 
 ![assets/intro-to-ctfs/forensics/extract.png](assets/intro-to-ctfs/forensics/extract.png)
 
@@ -352,13 +358,13 @@ Finally we've got the "flag".
 - If you know how to search smartly, the challenge is already over
 - Google Dorks is your excalibur
 
----
+--
 
 ### Challenge #5
 
 - Find my roll number
 
----
+--
 
 ### Solution
 
@@ -379,7 +385,7 @@ Finally we've got the "flag".
   - Easy to learn and v useful
 - Used in all places, right from RE to WE
 
----
+--
 
 ### Challenge #6
 
@@ -393,7 +399,7 @@ qwemSnq,embrtjThvovchzoivucTaanfamfdnqVewnrucp
 ewnSqmnrzhvcHicvuapiuasdfna.OenrqwmenrjhWziocu
 ```
 
----
+--
 
 ## HINT
 
@@ -407,7 +413,7 @@ qwemSnq,embrtjThvovchzoivucTaanfamfdnqVewnrucp
 ewnSqmnrzhvcHicvuapiuasdfna.OenrqwmenrjhWziocu
 ```
 
----
+--
 
 ### Solution
 
