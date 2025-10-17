@@ -20,7 +20,7 @@ verticalSeparator: "^--$"
 
 - Capture The Flag
 - Special kind of information security
-- You will apply your cybersecurity skills to solve a challenge and get the flag.
+- You will apply your cybersecurity skills to solve a challenge and get the Flag.
 
 --
 
