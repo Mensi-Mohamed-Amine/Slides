@@ -36,15 +36,6 @@ verticalSeparator: "^--$"
 - Usually of a format like `Curiosity{.*}`
   - `Curiosity{f0und_7h3_fl4g}`
 
---
-
-### ctftime.org
-
-- Use [ctftime.org](https://ctftime.org) to track CTFs and your team’s performance
-- CTF calendar
-- World-wide and country-wide team ratings
-- Writeups
-
 ---
 
 ## Variants
@@ -98,14 +89,18 @@ verticalSeparator: "^--$"
 
 ## Categories
 
-- Cryptography
-- Web Exploitation
+- Binary Exploitation (holy pwn XD)
 - Reverse Engineering
-  - Binary Exploitation
-- Forensics
-  - Steganography
+- Web Exploitation
+- Cryptography
+- Steganography
+- Digital Forensics
 - OSINT
 - Programming
+
+---
+
+<img src="https://media.makeameme.org/created/enough-talk-show.jpg" width="1000px" alt="demo sparta"/>
 
 ---
 
@@ -117,17 +112,14 @@ verticalSeparator: "^--$"
 
 --
 
-### ROTN
+### ROT13
 
-- Encryption by shifting each character by N places to the right
+- Encryption by shifting each character by 13 places to the right
 - Most popular - **ROT13** aka Caesar Cipher
-
-$$E_n(x) = (x+n) mod 26$$
-
-$$E_n^\prime(x) = D_n(x) = (x-n) mod 26$$
 
 --
 ![valid example](assets/intro-to-ctfs/crypto/4.png)
+
 --
 
 ### Challenge #1
@@ -144,6 +136,10 @@ Decrypt the message
 
 --
 
+### HINT 1 : google online websites to decrypt ROT13
+
+--
+
 ### Solution
 
 https://cryptii.com/pipes/rot13-decoder
@@ -152,17 +148,31 @@ https://cryptii.com/pipes/rot13-decoder
 
 --
 
+### FLAG :))))))
+
+```
+Curiosity{rot13_crack3d_succ3ssfu11y}
+```
+
+--
+
 ### Challenge #2
 
 **Encrypted message:**
 
-`Q3VyaW9zaXR5e3RoMXNfNF9iYXNlNjRfc3RyMW5nfQ==`
+`Q3VyaW9zaXR5e3RoMXNfaTVfNF9iYXNlNjRfc3RyMW5nfQ==`
 
 **Encryption Method:**
 
 `NOT PROVIDED :))))))) YOUR ON YOUR OWN FOR THIS ONE ....`
 
 Decrypt the message
+
+--
+
+### HINT 2 : dcode website can guess your cipher.
+
+https://www.dcode.fr/cipher-identifier
 
 --
 
@@ -181,6 +191,99 @@ https://www.dcode.fr/cipher-identifier
 https://gchq.github.io/CyberChef/
 
 ![valid example](assets/intro-to-ctfs/crypto/3.png)
+
+--
+
+### FLAG
+
+```
+Curiosity{th1s_i5_4_base64_str1ng}
+```
+
+--
+
+### Challenge #3
+
+- My friend **`saif sebai`** sniffed some stuff on the dark web.
+- Can you help him make a meaning.
+
+```
+N = 18919224834143456431138297509941203833538711268086617507582307027078320060730084168055807297259756134810081795820117047565519725225746431453190236115649174
+e = 65537
+Ciphertext = 16352260156356007648150430355580760925941907468433953973472759717469280555151823724727980096107806776714873348983354843165807595856628129146732561481440035
+```
+
+--
+
+### HINT 3 : Wikipedia might be a good place to understand RSA cipher
+
+https://en.wikipedia.org/wiki/RSA_cryptosystem
+
+### Or YOUR ARE LUCKY I POSTED ABOUT THISSSSSS :)))))
+
+https://mensi-mohamed-amine.github.io/posts/rsa/
+
+--
+
+### Solver :
+
+<pre><code class="language-python" data-line-numbers="1|3|5-11|13-14|16-22|24-26|28-31|33-41|">#!/usr/bin/env python3 
+
+from sympy import factorint, mod_inverse
+
+# Given values
+N = 18919224834143456431138297509941203833538711268086617507582307027078320060730084168055807297259756134810081795820117047565519725225746431453190236115649174
+print(f"N: {N}")
+e = 65537
+print(f"e: {e}")
+c = 16352260156356007648150430355580760925941907468433953973472759717469280555151823724727980096107806776714873348983354843165807595856628129146732561481440035
+print(f"c: {c}")
+
+# Factor N (SymPy will return a dict {prime: exponent})
+factors = factorint(N)
+
+# Convert factor dict to a list of primes repeated by exponent
+primes = []
+for p, exp in factors.items():
+    primes.extend([p] * exp)
+
+if len(primes) != 2:
+    raise SystemExit("N is not a product of exactly two primes (or SymPy didn't find it that way).")
+
+p, q = primes
+print("p =", p)
+print("q =", q)
+
+# Compute private exponent
+phi = (p - 1) * (q - 1)
+d = mod_inverse(e, phi)
+print("d =", d)
+
+# Decrypt
+m = pow(c, d, N)
+# Convert integer to bytes and decode
+mb = m.to_bytes((m.bit_length() + 7) // 8, 'big')
+try:
+    plaintext = mb.decode()
+except UnicodeDecodeError:
+    plaintext = mb
+print("FLAG:", plaintext)
+
+</code></pre>
+
+--
+
+### Solver output
+
+![valid example](assets/intro-to-ctfs/crypto/5.png)
+
+--
+
+### FLAG
+
+```
+Curiosity{abs0lu43_b34st_y0u_crack3d_rsa}
+```
 
 ---
 
@@ -429,3 +532,10 @@ OFFICEISTHEBESTTVSHOW
 - Helpful to others too
 
 ---
+
+### ctftime.org
+
+- Use [ctftime.org](https://ctftime.org) to track CTFs and your team’s performance
+- CTF calendar
+- World-wide and country-wide team ratings
+- Writeups
