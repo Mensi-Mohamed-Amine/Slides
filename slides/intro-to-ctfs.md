@@ -6,6 +6,10 @@ revealOptions:
   progress: true
   history: false
   slideNumber: false
+  revealOptions:
+  plugins:
+    - https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/highlight/highlight.min.js
+
 separator: "^---$"
 verticalSeparator: "^--$"
 ---
