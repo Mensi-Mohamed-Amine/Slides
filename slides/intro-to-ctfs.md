@@ -270,7 +270,7 @@ Ciphertext = 1635226015635600764815043035558076092594190746843395397347275971746
 
 --
 
-### HINT 3 : Wikipedia might be a good place to understand RSA cipher
+### HINT 4 : Wikipedia might be a good place to understand RSA cipher
 
 https://en.wikipedia.org/wiki/RSA_cryptosystem
 
@@ -546,33 +546,21 @@ sqlmap --flush-session -u "http://51.77.151.20:2789/login" --data="username=alic
 
 --
 
-### Example
+### Challenge #1
 
 We are given an image, and it might contain certain hidden information
 
-<img src = "assets/intro-to-ctfs/forensics/dog.jpg" width = "300">
+![assets/intro-to-ctfs/forensics/exiftool.png](assets/intro-to-ctfs/forensics/Dee_Dee.jpeg)
 
 --
 
-We start by examining the file type and other metadata of the image using the tool `exiftool`
-
-![assets/intro-to-ctfs/forensics/exiftool.png](assets/intro-to-ctfs/forensics/exiftool.png)
-
-`exiftool` didn't tell us anything usefull except that it is infact a `jpeg` image
+### HINT 1 : use exiftool (a linux tool to dump a picture metadata)
 
 --
 
-Now we will use `binwalk` tool to examine if there is some compressed data inside the image
+### Writeup
 
-![assets/intro-to-ctfs/forensics/binwalk.png](assets/intro-to-ctfs/forensics/binwalk.png)
-
-looks like there is a `hidden_text.txt` file compressed in the image. We can extract it using `binwalk -e` command.
-
---
-
-![assets/intro-to-ctfs/forensics/extract.png](assets/intro-to-ctfs/forensics/extract.png)
-
-Finally we've got the "flag".
+[Dee Dee](https://mensi-mohamed-amine.github.io/posts/securinets-ensit-beginner-ctf/#dee-deedigital-forensics)
 
 ---
 
@@ -585,80 +573,25 @@ Finally we've got the "flag".
 
 --
 
-### Challenge #5
+### Challenge #1
 
-- Find my roll number
+- COMMITMENT
+- Find the flag :))))
+- Description: I lost my PDFs files, can you help me find them.
 
 --
 
-### Solution
+### HINT 1 : WHAT DOES THE TASK NAME MEAN.
 
-**Google query**:
+--
 
-```
-<name> <roll_num_format> site:<college website>
-```
+### Writeup
+
+[COMMITMENT](https://mensi-mohamed-amine.github.io/posts/securinets-ensit-beginner-ctf/#commitmentosint)
 
 ---
 
-### Programming
-
-- Programming challenge
-- Usually automation related or simple problem-solving
-- **Python** is a high-level general purpose programming language
-  - Huge library and community
-  - Easy to learn and v useful
-- Used in all places, right from RE to WE
-
---
-
-### Challenge #6
-
-- You are given a large chunk of text worth easily over 100MB
-
-```text
-akOjas;kdfjFs;kdfjasFkfja;kfajf;kIjfdkjCfkafEk
-weruqwIeuqworieuSwoeruqperuqpweruqTeriuqwpHerw
-zmnEcv,mncv,mznvzvnzvBvnzvnzmvnzmcvnzExvbzcvbs
-qwemSnq,embrtjThvovchzoivucTaanfamfdnqVewnrucp
-ewnSqmnrzhvcHicvuapiuasdfna.OenrqwmenrjhWziocu
-```
-
---
-
-## HINT
-
-- Anything odd?
-
-```text
-akOjas;kdfjFs;kdfjasFkfja;kfajf;kIjfdkjCfkafEk
-weruqwIeuqworieuSwoeruqperuqpweruqTeriuqwpHerw
-zmnEcv,mncv,mznvzvnzvBvnzvnzmvnzmcvnzExvbzcvbs
-qwemSnq,embrtjThvovchzoivucTaanfamfdnqVewnrucp
-ewnSqmnrzhvcHicvuapiuasdfna.OenrqwmenrjhWziocu
-```
-
---
-
-### Solution
-
-- Notice that the capital letters form something meaningful
-- \*insert some ezpz programming with ASCII values\*
-- Extracted capital letter form this:
-
-```text
-OFFICEISTHEBESTTVSHOW
-```
-
----
-
-### Pentesting
-
-- Penetration testing
-- "Penetrate" the security measures and gain access to the system
-- Multiple ways to exploit a single system
-- Usually involves one or more of the above categories
-- Simulates real world scenarios
+# RANDOM ADVICES :))))
 
 ---
 
@@ -668,13 +601,17 @@ OFFICEISTHEBESTTVSHOW
 - [VulnHub](https://www.vulnhub.com/)
 - [HackTheBox](https://hackthebox.eu)
 
-(in that order)
-
 ---
 
-**Don't be a script kiddie**
+### ctftime.org !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-![script kiddie](assets/intro-to-ctfs/script_kiddie.png)
+- The goal is to engage not just play CTFs.
+- Use [ctftime.org](https://ctftime.org) to track CTFs and your team’s performance
+- CTF calendar
+- World-wide and country-wide team ratings
+- Writeups
+
+(in that order)
 
 ---
 
@@ -686,9 +623,11 @@ OFFICEISTHEBESTTVSHOW
 
 ---
 
-### ctftime.org
+- Theory is suckkss (ye33333) but its important !!!!!!!
+- let's get out hand dirty with reversing ......
 
-- Use [ctftime.org](https://ctftime.org) to track CTFs and your team’s performance
-- CTF calendar
-- World-wide and country-wide team ratings
-- Writeups
+<img src="https://media.licdn.com/dms/image/v2/D4D22AQEo1jsSFa12YA/feedshare-shrink_800/feedshare-shrink_800/0/1727582462114?e=2147483647&v=beta&t=EIz2OyTwJxw8i4UHIZlbPOXn0y3HS9vFTRg4lYUWT88" width="500px" alt="demo time"/>
+
+---
+
+# ...

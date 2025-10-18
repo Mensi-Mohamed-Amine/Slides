@@ -45,15 +45,6 @@
 - Usually of a format like `Curiosity{.*}`
   - `Curiosity{f0und_7h3_fl4g}`
 
---
-
-### ctftime.org
-
-- Use [ctftime.org](https://ctftime.org) to track CTFs and your team’s performance
-- CTF calendar
-- World-wide and country-wide team ratings
-- Writeups
-
 ---
 
 ## Variants
@@ -87,34 +78,38 @@
 
 ### KOTH
 
-- King Of The Hill
-- Asbolute chaos and fun
-- Multiple teams
-- Single target network consisting of many inter-connected systems
-- Repeatedly pivot and gain access to systems
-- Defend them from other teams
-- TryHackMe and HackTheBox
+- You and other players connect to a **shared vulnerable machine (target)**.
+- Everyone tries to **gain root (admin) access**.
+- Replace or defend a **flag file**, e.g. `/root/king.txt`.
+- The goal is to **“hold the hill”** (keep control) for as long as possible.
+- You earn points **for every minute/second** you remain in control of the flag.
 
 --
 
 ### Hardware
 
-- Black box testing
-- Break built-in security measures
-- Example: side-channel attacks
+Hardware CTF is a CTF style where the challenges involve real physical devices.
+
+In short: “pwning or analyzing physical devices to capture flags.”
+
+- Example: camera, drone, microphone ...
 
 ---
 
 ## Categories
 
-- Cryptography
-- Web Exploitation
+- Binary Exploitation (holy pwn XD)
 - Reverse Engineering
-  - Binary Exploitation
-- Forensics
-  - Steganography
+- Web Exploitation
+- Cryptography
+- Steganography
+- Digital Forensics
 - OSINT
 - Programming
+
+---
+
+<img src="https://media.makeameme.org/created/enough-talk-show.jpg" width="1000px" alt="demo sparta"/>
 
 ---
 
@@ -126,17 +121,14 @@
 
 --
 
-### ROTN
+### ROT13
 
-- Encryption by shifting each character by N places to the right
+- Encryption by shifting each character by 13 places to the right
 - Most popular - **ROT13** aka Caesar Cipher
-
-$$E_n(x) = (x+n) mod 26$$
-
-$$E_n^\prime(x) = D_n(x) = (x-n) mod 26$$
 
 --
 ![valid example](assets/intro-to-ctfs/crypto/4.png)
+
 --
 
 ### Challenge #1
@@ -153,6 +145,10 @@ Decrypt the message
 
 --
 
+### HINT 1 : google online websites to decrypt ROT13
+
+--
+
 ### Solution
 
 https://cryptii.com/pipes/rot13-decoder
@@ -161,17 +157,31 @@ https://cryptii.com/pipes/rot13-decoder
 
 --
 
+### FLAG :))))))
+
+```
+Curiosity{rot13_crack3d_succ3ssfu11y}
+```
+
+--
+
 ### Challenge #2
 
 **Encrypted message:**
 
-`Q3VyaW9zaXR5e3RoMXNfNF9iYXNlNjRfc3RyMW5nfQ==`
+`Q3VyaW9zaXR5e3RoMXNfaTVfNF9iYXNlNjRfc3RyMW5nfQ==`
 
 **Encryption Method:**
 
 `NOT PROVIDED :))))))) YOUR ON YOUR OWN FOR THIS ONE ....`
 
 Decrypt the message
+
+--
+
+### HINT 2 : dcode website can guess your cipher.
+
+https://www.dcode.fr/cipher-identifier
 
 --
 
@@ -191,6 +201,154 @@ https://gchq.github.io/CyberChef/
 
 ![valid example](assets/intro-to-ctfs/crypto/3.png)
 
+--
+
+### FLAG
+
+```
+Curiosity{th1s_i5_4_base64_str1ng}
+```
+
+--
+
+### Challenge #3
+
+<pre><code class="language-python" data-line-numbers="1|2-6|8-9|11|">#!/usr/bin/env python3 
+def custom_encryption(s: str) -> str:
+    lst = list(s)
+    for i in range(0, len(lst) - 1, 2):
+        lst[i], lst[i+1] = lst[i+1], lst[i]
+    return "".join(lst)
+
+# This is the ciphertext
+ciphertext = "uCirsoti{yht5ii__s_4uctsm0s_uhffelc_p1eh}r"
+
+print("Ciphertext:", ciphertext)
+</code></pre>
+
+--
+
+### HINT 3 : All you have to do is writing a decryption function
+
+--
+
+### Solution
+
+<pre><code class="language-python" data-line-numbers="1|2-6|8-9|11-14|16|">#!/usr/bin/env python3 
+def custom_encryption(s: str) -> str:
+    lst = list(s)
+    for i in range(0, len(lst) - 1, 2):
+        lst[i], lst[i+1] = lst[i+1], lst[i]
+    return "".join(lst)
+
+def custom_decryption(s: str) -> str:
+    return custom_encryption(s)
+
+# This is the ciphertext
+ciphertext = "uCirsoti{yht5ii__s_4uctsm0s_uhffelc_p1eh}r"
+FLAG = custom_decryption(ciphertext)
+print("Ciphertext:", ciphertext)
+
+print("FLAG:", FLAG)
+</code></pre>
+
+--
+
+![valid example](assets/intro-to-ctfs/crypto/6.png)
+
+--
+
+### FLAG
+
+```
+Curiosity{thi5_is_4_cust0m_shuffle_c1pher}
+```
+
+--
+
+### Challenge #4
+
+- My friend **`saif sebai`** sniffed some stuff on the dark web.
+- Can you help him make a meaning.
+
+```
+N = 18919224834143456431138297509941203833538711268086617507582307027078320060730084168055807297259756134810081795820117047565519725225746431453190236115649174
+e = 65537
+Ciphertext = 16352260156356007648150430355580760925941907468433953973472759717469280555151823724727980096107806776714873348983354843165807595856628129146732561481440035
+```
+
+--
+
+### HINT 4 : Wikipedia might be a good place to understand RSA cipher
+
+https://en.wikipedia.org/wiki/RSA_cryptosystem
+
+### Or YOUR ARE LUCKY I POSTED ABOUT THISSSSSS :)))))
+
+https://mensi-mohamed-amine.github.io/posts/rsa/
+
+--
+
+### Solver :
+
+<pre><code class="language-python" data-line-numbers="1|3|5-11|13-14|16-22|24-26|28-31|33-41|">#!/usr/bin/env python3 
+
+from sympy import factorint, mod_inverse
+
+# Given values
+N = 18919224834143456431138297509941203833538711268086617507582307027078320060730084168055807297259756134810081795820117047565519725225746431453190236115649174
+print(f"N: {N}")
+e = 65537
+print(f"e: {e}")
+c = 16352260156356007648150430355580760925941907468433953973472759717469280555151823724727980096107806776714873348983354843165807595856628129146732561481440035
+print(f"c: {c}")
+
+# Factor N (SymPy will return a dict {prime: exponent})
+factors = factorint(N)
+
+# Convert factor dict to a list of primes repeated by exponent
+primes = []
+for p, exp in factors.items():
+    primes.extend([p] * exp)
+
+if len(primes) != 2:
+    raise SystemExit("N is not a product of exactly two primes (or SymPy didn't find it that way).")
+
+p, q = primes
+print("p =", p)
+print("q =", q)
+
+# Compute private exponent
+phi = (p - 1) * (q - 1)
+d = mod_inverse(e, phi)
+print("d =", d)
+
+# Decrypt
+m = pow(c, d, N)
+# Convert integer to bytes and decode
+mb = m.to_bytes((m.bit_length() + 7) // 8, 'big')
+try:
+    plaintext = mb.decode()
+except UnicodeDecodeError:
+    plaintext = mb
+print("FLAG:", plaintext)
+
+</code></pre>
+
+--
+
+### Solver output
+
+![valid example](assets/intro-to-ctfs/crypto/5.png)
+
+--
+
+### FLAG
+
+```
+Curiosity{abs0lu43_b34st_y0u_crack3d_rsa}
+```
+
 ---
 
 ### Web Exploitation
@@ -205,7 +363,11 @@ https://gchq.github.io/CyberChef/
 
 --
 
-### Challenge #1
+<img src="https://media.makeameme.org/created/its-demo-time-bf0e1881d0.jpg" width="1000px" alt="demo time"/>
+
+--
+
+### Demo #1
 
 - We have a login/register website.
 - The flag is in the database of the website.
@@ -271,6 +433,22 @@ sqlmap --flush-session -u "http://51.77.151.20:2789/login" --data="username=alic
 
 ![valid example](assets/intro-to-ctfs/web/6.png)
 
+--
+
+<img src="https://media.makeameme.org/created/its-all-over-tavdc2.jpg" width="500px" alt="demo time"/>
+
+--
+
+### Mitigations
+
+- Store hashed password not plaintext
+- Input sanitization & Input validation (reject invalid/malicious data like sql queries)
+- ...
+
+--
+
+# Q & A
+
 ---
 
 ### Reverse Engineering
@@ -283,7 +461,85 @@ sqlmap --flush-session -u "http://51.77.151.20:2789/login" --data="username=alic
 
 --
 
-![assets/intro-to-ctfs/re/levelsofapl.png](assets/intro-to-ctfs/re/levelsofapl.png)
+<img src="https://media.makeameme.org/created/demo-time-finally.jpg" width="500px" alt="demo time"/>
+
+--
+
+### Demo #1
+
+- We have a proprietary software.
+- crack its license.
+
+--
+
+- I entered a license, the program shows that my license is not valid.
+
+![valid example](assets/intro-to-ctfs/re/1.png)
+
+--
+
+- First thing i did was opening the program inside `x32dbg`
+
+![valid example](assets/intro-to-ctfs/re/2.png)
+
+--
+
+- Then i looked for string references.
+
+![valid example](assets/intro-to-ctfs/re/3.png)
+
+--
+
+- I looked for the string which is dumped when our license is wrong in the code.
+- `Nope, thats not it!\n\rTry again`
+
+![valid example](assets/intro-to-ctfs/re/4.png)
+
+--
+
+- We found the comparing code snippet.
+
+![valid example](assets/intro-to-ctfs/re/5.png)
+
+--
+
+- Now we will patch the jne instruction that is dependent on the comparison to always jump to "correct-license" code snippet.
+
+![valid example](assets/intro-to-ctfs/re/6.png)
+
+--
+
+- Patched :))))))))
+
+![valid example](assets/intro-to-ctfs/re/7.png)
+
+--
+
+- Save our patched program (CTRL + P)
+
+![valid example](assets/intro-to-ctfs/re/8.png)
+
+--
+
+- let's now test our patched program.
+- Even though we entered random data we passed the license check.
+
+![valid example](assets/intro-to-ctfs/re/9.png)
+
+--
+
+<img src="https://media.makeameme.org/created/its-over-clap.jpg" width="500px" alt="demo time"/>
+
+--
+
+### Mitigations
+
+- Code obfuscation & anti-tamper
+- Sign binaries and enforce signature checks at install/run time;
+
+--
+
+# Q & A
 
 ---
 
@@ -299,33 +555,21 @@ sqlmap --flush-session -u "http://51.77.151.20:2789/login" --data="username=alic
 
 --
 
-### Example
+### Challenge #1
 
 We are given an image, and it might contain certain hidden information
 
-<img src = "assets/intro-to-ctfs/forensics/dog.jpg" width = "300">
+![assets/intro-to-ctfs/forensics/exiftool.png](assets/intro-to-ctfs/forensics/Dee_Dee.jpeg)
 
 --
 
-We start by examining the file type and other metadata of the image using the tool `exiftool`
-
-![assets/intro-to-ctfs/forensics/exiftool.png](assets/intro-to-ctfs/forensics/exiftool.png)
-
-`exiftool` didn't tell us anything usefull except that it is infact a `jpeg` image
+### HINT 1 : use exiftool (a linux tool to dump a picture metadata)
 
 --
 
-Now we will use `binwalk` tool to examine if there is some compressed data inside the image
+### Writeup
 
-![assets/intro-to-ctfs/forensics/binwalk.png](assets/intro-to-ctfs/forensics/binwalk.png)
-
-looks like there is a `hidden_text.txt` file compressed in the image. We can extract it using `binwalk -e` command.
-
---
-
-![assets/intro-to-ctfs/forensics/extract.png](assets/intro-to-ctfs/forensics/extract.png)
-
-Finally we've got the "flag".
+[Dee Dee](https://mensi-mohamed-amine.github.io/posts/securinets-ensit-beginner-ctf/#dee-deedigital-forensics)
 
 ---
 
@@ -338,80 +582,25 @@ Finally we've got the "flag".
 
 --
 
-### Challenge #5
+### Challenge #1
 
-- Find my roll number
+- COMMITMENT
+- Find the flag :))))
+- Description: I lost my PDFs files, can you help me find them.
 
 --
 
-### Solution
+### HINT 1 : WHAT DOES THE TASK NAME MEAN.
 
-**Google query**:
+--
 
-```
-<name> <roll_num_format> site:<college website>
-```
+### Writeup
+
+[COMMITMENT](https://mensi-mohamed-amine.github.io/posts/securinets-ensit-beginner-ctf/#commitmentosint)
 
 ---
 
-### Programming
-
-- Programming challenge
-- Usually automation related or simple problem-solving
-- **Python** is a high-level general purpose programming language
-  - Huge library and community
-  - Easy to learn and v useful
-- Used in all places, right from RE to WE
-
---
-
-### Challenge #6
-
-- You are given a large chunk of text worth easily over 100MB
-
-```text
-akOjas;kdfjFs;kdfjasFkfja;kfajf;kIjfdkjCfkafEk
-weruqwIeuqworieuSwoeruqperuqpweruqTeriuqwpHerw
-zmnEcv,mncv,mznvzvnzvBvnzvnzmvnzmcvnzExvbzcvbs
-qwemSnq,embrtjThvovchzoivucTaanfamfdnqVewnrucp
-ewnSqmnrzhvcHicvuapiuasdfna.OenrqwmenrjhWziocu
-```
-
---
-
-## HINT
-
-- Anything odd?
-
-```text
-akOjas;kdfjFs;kdfjasFkfja;kfajf;kIjfdkjCfkafEk
-weruqwIeuqworieuSwoeruqperuqpweruqTeriuqwpHerw
-zmnEcv,mncv,mznvzvnzvBvnzvnzmvnzmcvnzExvbzcvbs
-qwemSnq,embrtjThvovchzoivucTaanfamfdnqVewnrucp
-ewnSqmnrzhvcHicvuapiuasdfna.OenrqwmenrjhWziocu
-```
-
---
-
-### Solution
-
-- Notice that the capital letters form something meaningful
-- \*insert some ezpz programming with ASCII values\*
-- Extracted capital letter form this:
-
-```text
-OFFICEISTHEBESTTVSHOW
-```
-
----
-
-### Pentesting
-
-- Penetration testing
-- "Penetrate" the security measures and gain access to the system
-- Multiple ways to exploit a single system
-- Usually involves one or more of the above categories
-- Simulates real world scenarios
+# RANDOM ADVICES :))))
 
 ---
 
@@ -421,13 +610,17 @@ OFFICEISTHEBESTTVSHOW
 - [VulnHub](https://www.vulnhub.com/)
 - [HackTheBox](https://hackthebox.eu)
 
-(in that order)
-
 ---
 
-**Don't be a script kiddie**
+### ctftime.org !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-![script kiddie](assets/intro-to-ctfs/script_kiddie.png)
+- The goal is to engage not just play CTFs.
+- Use [ctftime.org](https://ctftime.org) to track CTFs and your team’s performance
+- CTF calendar
+- World-wide and country-wide team ratings
+- Writeups
+
+(in that order)
 
 ---
 
@@ -438,6 +631,15 @@ OFFICEISTHEBESTTVSHOW
 - Helpful to others too
 
 ---
+
+- Theory is suckkss (ye33333) but its important !!!!!!!
+- let's get out hand dirty with reversing ......
+
+<img src="https://media.licdn.com/dms/image/v2/D4D22AQEo1jsSFa12YA/feedshare-shrink_800/feedshare-shrink_800/0/1727582462114?e=2147483647&v=beta&t=EIz2OyTwJxw8i4UHIZlbPOXn0y3HS9vFTRg4lYUWT88" width="500px" alt="demo time"/>
+
+---
+
+# ...
 
           </textarea>
         </section>
