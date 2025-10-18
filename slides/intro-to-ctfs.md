@@ -488,7 +488,7 @@ sqlmap --flush-session -u "http://51.77.151.20:2789/login" --data="username=alic
 
 --
 
-- We found the comparing snippet
+- We found the comparing code snippet.
 
 ![valid example](assets/intro-to-ctfs/re/5.png)
 
@@ -503,8 +503,6 @@ sqlmap --flush-session -u "http://51.77.151.20:2789/login" --data="username=alic
 - Patched :))))))))
 
 ![valid example](assets/intro-to-ctfs/re/7.png)
-
---
 
 --
 
