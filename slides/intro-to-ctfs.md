@@ -225,7 +225,7 @@ print("Ciphertext:", ciphertext)
 
 ### Solution
 
-<pre><code class="language-python" data-line-numbers="1|2-6|8-9|11|">#!/usr/bin/env python3 
+<pre><code class="language-python" data-line-numbers="1|2-6|8-9|11-14|16|">#!/usr/bin/env python3 
 def custom_encryption(s: str) -> str:
     lst = list(s)
     for i in range(0, len(lst) - 1, 2):
@@ -426,6 +426,18 @@ sqlmap --flush-session -u "http://51.77.151.20:2789/login" --data="username=alic
 
 --
 
+<img src="https://media.makeameme.org/created/its-all-over-tavdc2.jpg" width="500px" alt="demo time"/>
+
+--
+
+### Mitigations
+
+- Store hashed password not plaintext
+- Input sanitization & Input validation (reject invalid/malicious data like sql queries)
+- ...
+
+--
+
 # Q & A
 
 ---
@@ -440,7 +452,87 @@ sqlmap --flush-session -u "http://51.77.151.20:2789/login" --data="username=alic
 
 --
 
-![assets/intro-to-ctfs/re/levelsofapl.png](assets/intro-to-ctfs/re/levelsofapl.png)
+<img src="https://media.makeameme.org/created/demo-time-finally.jpg" width="500px" alt="demo time"/>
+
+--
+
+### Demo #1
+
+- We have a proprietary software.
+- crack its license.
+
+--
+
+- I entered a license, the program shows that my license is not valid.
+
+![valid example](assets/intro-to-ctfs/re/1.png)
+
+--
+
+- First thing i did was opening the program inside `x32dbg`
+
+![valid example](assets/intro-to-ctfs/re/2.png)
+
+--
+
+- Then i looked for string references.
+
+![valid example](assets/intro-to-ctfs/re/3.png)
+
+--
+
+- I looked for the string which is dumped when our license is wrong in the code.
+- `Nope, thats not it!\n\rTry again`
+
+![valid example](assets/intro-to-ctfs/re/4.png)
+
+--
+
+- We found the comparing snippet
+
+![valid example](assets/intro-to-ctfs/re/5.png)
+
+--
+
+- Now we will patch the jne instruction that is dependent on the comparison to always jump to "correct-license" code snippet.
+
+![valid example](assets/intro-to-ctfs/re/6.png)
+
+--
+
+- Patched :))))))))
+
+![valid example](assets/intro-to-ctfs/re/7.png)
+
+--
+
+--
+
+- Save our patched program (CTRL + P)
+
+![valid example](assets/intro-to-ctfs/re/8.png)
+
+--
+
+- let's now test our patched program.
+- Even though we entered random data we passed the license check.
+
+![valid example](assets/intro-to-ctfs/re/9.png)
+
+--
+
+<img src="https://media.makeameme.org/created/its-over-clap.jpg" width="500px" alt="demo time"/>
+
+--
+
+### Mitigations
+
+- Code obfuscation & anti-tamper
+- Sign binaries and enforce signature checks at install/run time;
+
+--
+
+# Q & A
 
 ---
 
