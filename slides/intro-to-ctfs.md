@@ -69,21 +69,21 @@ verticalSeparator: "^--$"
 
 ### KOTH
 
-- King Of The Hill
-- Asbolute chaos and fun
-- Multiple teams
-- Single target network consisting of many inter-connected systems
-- Repeatedly pivot and gain access to systems
-- Defend them from other teams
-- TryHackMe and HackTheBox
+- You and other players connect to a **shared vulnerable machine (target)**.
+- Everyone tries to **gain root (admin) access**.
+- Replace or defend a **flag file**, e.g. `/root/king.txt`.
+- The goal is to **“hold the hill”** (keep control) for as long as possible.
+- You earn points **for every minute/second** you remain in control of the flag.
 
 --
 
 ### Hardware
 
-- Black box testing
-- Break built-in security measures
-- Example: side-channel attacks
+Hardware CTF is a CTF style where the challenges involve real physical devices.
+
+In short: “pwning or analyzing physical devices to capture flags.”
+
+- Example: camera, drone, microphone ...
 
 ---
 
@@ -204,6 +204,61 @@ Curiosity{th1s_i5_4_base64_str1ng}
 
 ### Challenge #3
 
+<pre><code class="language-python" data-line-numbers="1|2-6|8-9|11|">#!/usr/bin/env python3 
+def custom_encryption(s: str) -> str:
+    lst = list(s)
+    for i in range(0, len(lst) - 1, 2):
+        lst[i], lst[i+1] = lst[i+1], lst[i]
+    return "".join(lst)
+
+# This is the ciphertext
+ciphertext = "uCirsoti{yht5ii__s_4uctsm0s_uhffelc_p1eh}r"
+
+print("Ciphertext:", ciphertext)
+</code></pre>
+
+--
+
+### HINT 3 : All you have to do is writing a decryption function
+
+--
+
+### Solution
+
+<pre><code class="language-python" data-line-numbers="1|2-6|8-9|11|">#!/usr/bin/env python3 
+def custom_encryption(s: str) -> str:
+    lst = list(s)
+    for i in range(0, len(lst) - 1, 2):
+        lst[i], lst[i+1] = lst[i+1], lst[i]
+    return "".join(lst)
+
+def custom_decryption(s: str) -> str:
+    return custom_encryption(s)
+
+# This is the ciphertext
+ciphertext = "uCirsoti{yht5ii__s_4uctsm0s_uhffelc_p1eh}r"
+FLAG = custom_decryption(ciphertext)
+print("Ciphertext:", ciphertext)
+
+print("FLAG:", FLAG)
+</code></pre>
+
+--
+
+![valid example](assets/intro-to-ctfs/crypto/6.png)
+
+--
+
+### FLAG
+
+```
+Curiosity{thi5_is_4_cust0m_shuffle_c1pher}
+```
+
+--
+
+### Challenge #4
+
 - My friend **`saif sebai`** sniffed some stuff on the dark web.
 - Can you help him make a meaning.
 
@@ -299,7 +354,11 @@ Curiosity{abs0lu43_b34st_y0u_crack3d_rsa}
 
 --
 
-### Challenge #1
+<img src="https://media.makeameme.org/created/its-demo-time-bf0e1881d0.jpg" width="1000px" alt="demo time"/>
+
+--
+
+### Demo #1
 
 - We have a login/register website.
 - The flag is in the database of the website.
@@ -364,6 +423,10 @@ sqlmap --flush-session -u "http://51.77.151.20:2789/login" --data="username=alic
 - And we got our flag :))))))
 
 ![valid example](assets/intro-to-ctfs/web/6.png)
+
+--
+
+# Q & A
 
 ---
 
