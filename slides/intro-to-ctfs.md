@@ -118,6 +118,7 @@ In short: “pwning or analyzing physical devices to capture flags.”
 - Most popular - **ROT13** aka Caesar Cipher
 
 --
+
 ![valid example](assets/intro-to-ctfs/crypto/4.png)
 
 --
