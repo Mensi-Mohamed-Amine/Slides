@@ -1,172 +1,248 @@
 ---
-title: Intro to Linux
+title: My Slides
 revealOptions:
   transition: "slide"
+  controls: true
+  progress: true
+  history: false
+  slideNumber: false
+separator: "^---$"
+verticalSeparator: "^--$"
 ---
 
-# Intro to Linux
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/monokai-sublime.min.css">
 
-#### _Oh I use Arch BTW_
+<link rel="icon" href="./favicon.ico" type="image/x-icon">
 
----
+# Linux Training
 
-# What is OS ?
-
----
-
-### An operating system is a program that acts as an interface between the user and the computer hardware and controls the execution of all kinds of programs.
-
----
-
-## ![image](./assets/intro-to-linux/flow.svg)
-
-# What is Linux ?
+#### + other things you should know
 
 ---
 
-## Just like Windows, iOS, and Mac OS, Linux is an operating system.
+## Module 1
+
+## Intrduction to linux
 
 ---
 
-- ### Linux began in 1991 as a personal project by Finnish student Linus Torvalds.
-- ### It is one of the most popular platforms on the planet.
-- ### Even Android, is powered by the Linux operating system.
+## Module 2
+
+## Download, install and configure linux
 
 ---
 
-## Different pieces of Linux
+## Module 3
 
-- #### Bootloader
-- #### Kernel
-- #### Init system
-- #### Daemons
-- #### Graphical server
-- #### Desktop environment
-- #### Applications
+## System access and file system
 
----
+--
 
-# Windows vs Linux & Why Linux ?
+### Step 1 Access the System
 
----
+There are two access types: **Console** (local) and **Remote**.
 
----
+Demo (on your local machine):
 
----
+```bash
+whoami
+hostname
+```
 
-# Different Distros of Linux
+If you have two systems:
 
-- ### Linux has a number of different versions for every type of user.
-- ### These versions are called distributions ( "distros" in short )
+```bash
+ssh username@192.168.1.x
+```
 
----
+SSH gives you command-line access.
 
-## Popular Linux distros :
+--
 
-- ### UBUNTU
-- ### KALI LINUX
-- ### DEBIAN
-- ### LINUX MINT
-- ### FEDORA
-- ### PARROT OS
-- ### ARCH LINUX
-- ### Ubuntu Server
+### Step 2 Understand the Prompt
 
-##### and many more....
+- A hostname is the name of a computer or device on a network.
 
----
+![valid example](assets/intro-to-linux/1.png)
 
-## Installation
+--
 
-- ### Install as the main OS
-- ### Using VirtualBox/VMware
-- ### Dual Boot
+### Connect to my VM from Windows using ssh
 
----
+![valid example](assets/intro-to-linux/2.png)
 
-##### comming soon ....
+--
 
----
+### Step 3 Exploring the File System Structure
 
-# File structure of Linux
+```bash
+ls /
+tree -L 1 /
+```
 
-#### The Linux File Hierarchy Structure or the Filesystem Hierarchy Standard (FHS) defines the directory structure and directory contents in Unix-like operating systems.
+_(install tree if missing: `sudo apt install tree`)_
 
----
+```bash
+┌──(mensi㉿vbox)-[/]
+└─$ tree -L 1 /
+/
+├── bin -> usr/bin
 
-## `/` [/root]
+```
 
-#### root directory of the entire file system hierarchy
+This means that /bin is a symbolic link (=soft link) that points to /usr/bin. In other words, when you access /bin, the system redirects you to /usr/bin.
 
----
+--
 
-## ![image](./assets/intro-to-linux/root.png)
+![valid example](assets/intro-to-linux/3.png)
 
-- ## `/bin` --> Contains binary executables
-- ## `/boot` --> Contains Boot loader files, e.g., kernels, initrd.
-- ## `/dev` --> Essential device files
-- ## `/etc` --> Contains configuration files required by all programs.
-- ## `/home` --> Users’ home directories, containing saved files, personal settings, etc.
-- ## `/lib` --> Libraries essential for the binaries in /bin/ and /sbin/.
-- ## `/media` --> Temporary mount directory for removable devices.
-- ## `/opt` --> Contains add-on applications from individual vendors
-- ## `/tmp` --> Directory that contains temporary files created by system and users.
-- ## `/usr` --> Contains binaries, libraries, documentation, and source-code for second level programs.
+--
 
----
+### Step 4 Navigation
 
-# Basic commands
+```bash
+pwd
+cd /
+ls
+cd /var/log
+pwd
+cd ~
+ls
+pwd
+```
 
-- ### The Linux command is a utility of the Linux operating system.
-- ### The commands are executed on the Linux terminal.
-- ### We can do basic work and advanced work through its terminal.
+Explain:
 
----
+- `cd` → change directory
+- `pwd` → print working directory
+- `ls` → list files
+- TAB key for auto-complete
 
-- ## `pwd` -> Shows Present working directory
-- ## `mkdir <new_directory>` -> Make new directory
-- ## `rmdir <dir_name>` -> Remove a directory
-- ## `ls` -> Shows list of content of a directory
-- ## `cd <dir_name>` -> Change directory
-- ## `touch <file_name>` -> Create new Empty file
-- ## `cat` -> Create/display/copy file
-- ## `rm <file_name>` -> Remove a file
-- ## `cp` -> copy a file or directory
-- ## `head` & `tail` -> displays first and last 10 lines of a file respectively
-- ## `tac` -> shows file content in reverse order
+--
 
----
+### Step 5 File and Directory Properties
 
-- ## `su` -> Gives admin access to a user
-- ## `useradd <username>` -> add or remove a user
-- ## `passwd <username>` -> create or change the passowrd for a user
-- ## `groupadd` -> create a user group
-- ## `whoami` & `who` -> gives info abhout logged in user
+```bash
+ls -l /etc | head
+```
 
----
+Explain:
 
-- ## `grep <options>` -> Used for searching the content from a file using regex.
-- ## `comm <options>` -> compares two files
-- ## `wc <file_name>` -> counts words,lines and charecters in a line.
-- ## `od <options>` -> displays the content of a file in different format.
-- ## `find <options>` -> find particular file in a directory
+- `drwxr-xr-x` → directory with permissions
+- `-rw-r--r--` → regular file
+- 2nd column → number of links (soft + hard)
+- Owner and group info
+- Check slides for all columns
 
----
+--
 
-- ## `df` -> displays disk space used in file system.
-- ## `clear` -> clears the terminal's screen.
-- ## `ifconfig` -> Shows ip of connected networks
-- ## `ssh` -> used to create a remote connection through ssh protocol
-- ## `host` -> displays id of a given domain name or vice versa
+### Step 6 Root Meaning
 
-##### and many more ...
+```bash
+sudo su
+whoami
+cd /
+pwd
+cd ~
+pwd
+```
 
----
+Explain 3 meanings:
 
-# Some common tools
+1. **root account** → superuser
+2. **root directory** `/` → top of filesystem
+3. **root home** → `/root`
 
----
+--
 
-# Do and Donts
+### Step 7 File System Paths
 
----
+### Absolute Path (Starts with /)
+
+```bash
+cd /var/log
+pwd
+```
+
+### Relative Path (Doesn't starts with /)
+
+```bash
+cd ..
+cd log
+```
+
+--
+
+### Step 8 Creating Files and Directories
+
+```bash
+mkdir ~/demo
+cd ~/demo
+touch test1.txt
+vim test2.txt
+```
+
+Explain:
+
+- `touch` creates empty file
+- `vim` opens text editor
+
+--
+
+### Step 9 Copying and Moving
+
+```bash
+cp test1.txt copy.txt
+mkdir backup
+cp -R ~/demo ~/backup_demo
+```
+
+- When you use cp -R, it tells the cp (copy) command to copy directories and their entire contents, including all subdirectories and files, recursively.
+
+--
+
+### Step 10 Finding Files
+
+- find command syntax :
+
+```bash
+find [starting_directory] [options] [expression]
+```
+
+- Example :
+
+```bash
+find /etc -name "hosts"
+```
+
+--
+
+### Step 11 Wildcards
+
+```bash
+cd ~/demo
+ls *.txt
+ls test?.txt
+```
+
+Explain:
+
+- `*` = any string
+- `?` = one character
+- `[a-z]` = range
+
+--
+
+### Step 12 Hard and Soft Links
+
+```bash
+echo "Linux Demo" > fileA.txt
+ln fileA.txt hardlinkA
+ln -s fileA.txt softlinkA
+ls -l
+```
+
+Explain:
+
+- Hard link shares same inode (real copy) (same size + same inode)
+- Soft link (symbolic) points to the original file (like raccourcie in windows)
